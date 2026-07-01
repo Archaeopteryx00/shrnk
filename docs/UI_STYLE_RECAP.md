@@ -32,21 +32,31 @@ Defined in [index.css](file:///d:/Learning%20System/02_SCHOOL/Semester%204/Web%2
 - **Buttons / Inputs**: `12px` (`--radius-button`, `--radius-input`)
 - **Badges**: `999px` (`--radius-badge`)
 
+### Typographic Scale
+- **H1 (Bold)**: `32px` (2rem)
+- **H2 (Semibold)**: `24px` (1.5rem)
+- **H3 (Semibold)**: `20px` (1.25rem)
+- **Body (Regular)**: `16px` (1rem)
+- **Small (Regular)**: `14px` (0.875rem)
+- **Caption (Regular)**: `12px` (0.75rem)
+
 ---
 
 ## 3. Key Components & Styling Patterns
 
-### Navigation Navbar
-- Fixed to the top with a bottom border `1px solid #E4E4E7`.
-- Logo is loaded from the public logotype `/logo type.png` at `32px` height, keeping navbar clean and monochrome.
+### Navigation Navbar (per `stylekit.png`)
+- Left section aligns the `shrnk` logotype image next to direct navigation links (`Dashboard` and `Shorten Link`).
+- Right section renders a notification bell icon button (`🔔`) alongside the user avatar badge (e.g. initials `MU`) that triggers a profile dropdown menu.
 
-### Buttons
-- **Primary Buttons**: Minimalist monochrome style (black `#09090B` background, white text) instead of primary indigo. This matches modern minimal SaaS design rules.
+### Buttons (per `stylekit.png`)
+- **Primary Buttons**: Solid black (`#000000` background, white text) with a hover state transitioning to `#27272A`.
 - **Secondary Buttons**: White background, thin border, and dark text.
-- **Danger Buttons**: White background, thin red border, red text.
+- **Danger Buttons**: White background, thin red border (`#EF4444`), red text.
 
-### Iconography (Lucide-Style Inline SVGs)
-Instead of using external packages or playful emojis, the dashboard actions and stats pages use inline SVG icons designed with `stroke="currentColor"`, `stroke-width="2"`, and configured to `16px` to `20px` to maintain a consistent developer SaaS look.
+### Layouts & Elements (per `stylekit.png`)
+- **Desktop Table View**: Generates a clean tabular representation of links on screen widths > 768px with columns `Short Link`, `Clicks`, and `Created At`.
+- **Mobile Card View**: Stacks records on mobile displays (< 768px). Each card includes a rounded icon wrapper (`rgba(99, 102, 241, 0.08)` background, indigo link icon), title, short URL, original URL, click counter, and a computed time-ago indicator (e.g. `2 hours ago`).
+- **Badges**: Styled active (`#22C55E` text on light green background with border), inactive, and archived states.
 
 ---
 
