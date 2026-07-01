@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard'
 import CreateLink from './pages/CreateLink'
 import EditLink from './pages/EditLink'
 import LinkDetail from './pages/LinkDetail'
+import LandingPage from './pages/LandingPage'
 
 function App() {
   const { token, user, logout } = useAuth()
@@ -54,7 +55,7 @@ function App() {
 
       <main className="main-content">
         <Routes>
-          <Route path="/" element={token ? <Navigate to="/dashboard" replace /> : <Navigate to="/login" replace />} />
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={!token ? <Login /> : <Navigate to="/dashboard" replace />} />
           <Route path="/register" element={!token ? <Register /> : <Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
