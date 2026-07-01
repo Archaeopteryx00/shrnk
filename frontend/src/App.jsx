@@ -20,8 +20,8 @@ function App() {
   return (
     <div className="app-container">
       <header className="navbar">
-        <Link to="/" className="logo">
-          ⚡ shrnk
+        <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="/logo%20type.png" alt="shrnk" style={{ height: '32px', objectFit: 'contain' }} />
         </Link>
         <nav className="nav-links">
           {token ? (
