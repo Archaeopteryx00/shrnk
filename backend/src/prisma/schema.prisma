@@ -1,0 +1,37 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  username  String
+  email     String      @unique
+  password  String
+  createdAt DateTime    @default(now())
+  links     ShortLink[]
+}
+
+model ShortLink {
+  id          Int            @id @default(autoincrement())
+  title       String?
+  originalUrl String
+  shortCode   String         @unique
+  clickCount  Int            @default(0)
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  userId      Int
+  user        User           @relation(fields: [userId], references: [id])
+  clicks      ClickHistory[]
+}
+
+model ClickHistory {
+  id          Int       @id @default(autoincrement())
+  shortLinkId Int
+  clickedAt   DateTime  @default(now())
+  shortLink   ShortLink @relation(fields: [shortLinkId], references: [id], onDelete: Cascade)
+}

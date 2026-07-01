@@ -1,0 +1,4 @@
+# Ignore local workspace or editor files in the docs folder
+.DS_Store
+Thumbs.db
+*.log
