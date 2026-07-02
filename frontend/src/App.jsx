@@ -32,7 +32,7 @@ function App() {
       <header className="navbar">
         <div className="nav-left-group">
           <Link to="/" className="logo">
-            <img src="/logo%20type.png" alt="shrnk" style={{ height: '24px', objectFit: 'contain' }} />
+            <img src="/logo%20type.png" alt="shrnk" />
           </Link>
           {token && (
             <nav className="nav-links">
