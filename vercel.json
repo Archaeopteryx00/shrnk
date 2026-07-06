@@ -18,7 +18,7 @@
             }
         },
         {
-            "source": "/:shortCode([a-zA-Z0-9]{6})",
+            "source": "/:shortCode((?!login|register|dashboard|links|api|assets|favicon|logo|icon|icons|vite|src)[a-zA-Z0-9-_]{3,30})",
             "destination": {
                 "type": "service",
                 "service": "backend"
