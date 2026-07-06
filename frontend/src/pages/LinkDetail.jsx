@@ -45,7 +45,7 @@ const LinkDetail = () => {
   if (error || !stats) {
     return (
       <div style={{ maxWidth: '600px', margin: '0 auto' }}>
-        <div className="alert alert-error">{error || 'Unable to retrieve statistics.'}</div>
+        <div className="alert alert-error">{typeof error === 'object' ? (error.message || error.error || JSON.stringify(error)) : (error || 'Unable to retrieve statistics.')}</div>
         <Link to="/dashboard" className="btn btn-secondary">
           Back to Dashboard
         </Link>

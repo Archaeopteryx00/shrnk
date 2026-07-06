@@ -55,7 +55,7 @@ const EditLink = () => {
         <h2 className="card-title">Edit Link</h2>
         <p className="card-subtitle">Update your short link configurations</p>
 
-        {error && <div className="alert alert-error">{error}</div>}
+        {error && <div className="alert alert-error">{typeof error === 'object' ? (error.message || error.error || JSON.stringify(error)) : error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">

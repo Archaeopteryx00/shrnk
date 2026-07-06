@@ -36,7 +36,7 @@ const Login = () => {
         <h1 className="card-title">Welcome Back</h1>
         <p className="card-subtitle">Log in to manage your shortened links</p>
 
-        {error && <div className="alert alert-error">{error}</div>}
+        {error && <div className="alert alert-error">{typeof error === 'object' ? (error.message || error.error || JSON.stringify(error)) : error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">

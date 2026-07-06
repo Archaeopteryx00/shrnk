@@ -89,7 +89,7 @@ const Dashboard = () => {
 
   return (
     <div>
-      {error && <div className="alert alert-error">{error}</div>}
+      {error && <div className="alert alert-error">{typeof error === 'object' ? (error.message || error.error || JSON.stringify(error)) : error}</div>}
 
       {/* Main Page Header */}
       <div className="dashboard-header-row">

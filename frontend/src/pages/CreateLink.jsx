@@ -167,7 +167,7 @@ const CreateLink = () => {
       </div>
 
       <div className="card" style={{ maxWidth: '100%', padding: '2rem' }}>
-        {error && <div className="alert alert-error">{error}</div>}
+        {error && <div className="alert alert-error">{typeof error === 'object' ? (error.message || error.error || JSON.stringify(error)) : error}</div>}
 
         <form onSubmit={handleSubmit}>
           <div className="form-group">

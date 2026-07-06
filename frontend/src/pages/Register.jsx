@@ -39,7 +39,7 @@ const Register = () => {
         <h1 className="card-title">Create Account</h1>
         <p className="card-subtitle">Sign up to start shortening links</p>
 
-        {error && <div className="alert alert-error">{error}</div>}
+        {error && <div className="alert alert-error">{typeof error === 'object' ? (error.message || error.error || JSON.stringify(error)) : error}</div>}
         {success && (
           <div className="alert alert-success">
             Registration successful! Redirecting to login...
