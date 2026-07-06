@@ -70,7 +70,7 @@ const getLinkById = async (req, res, next) => {
 
 const createLink = async (req, res, next) => {
   try {
-    const { originalUrl, title } = req.body
+    const { originalUrl, title, customCode } = req.body
     const userId = req.user.id
 
     // 1. Validation
@@ -84,23 +84,46 @@ const createLink = async (req, res, next) => {
       return res.status(400).json({ error: 'Title must be a string and under 100 characters.' })
     }
 
-    // 2. Generate unique shortCode
     let shortCode = ''
-    let isUnique = false
-    let attempts = 0
-    while (!isUnique && attempts < 10) {
-      shortCode = generateShortCode()
-      const existing = await prisma.shortLink.findUnique({
-        where: { shortCode },
-      })
-      if (!existing) {
-        isUnique = true
-      }
-      attempts++
-    }
 
-    if (!isUnique) {
-      return res.status(500).json({ error: 'Failed to generate a unique short code. Please try again.' })
+    if (customCode) {
+      const trimmedCustom = customCode.trim()
+      
+      // Validate custom code format: alphanumeric, hyphens, underscores
+      if (!/^[a-zA-Z0-9-_]+$/.test(trimmedCustom)) {
+        return res.status(400).json({ error: 'Custom short code can only contain letters, numbers, hyphens, and underscores.' })
+      }
+      if (trimmedCustom.length < 3 || trimmedCustom.length > 30) {
+        return res.status(400).json({ error: 'Custom short code must be between 3 and 30 characters.' })
+      }
+
+      // Check if unique
+      const existing = await prisma.shortLink.findUnique({
+        where: { shortCode: trimmedCustom }
+      })
+      if (existing) {
+        return res.status(400).json({ error: 'This custom short code is already in use.' })
+      }
+
+      shortCode = trimmedCustom
+    } else {
+      // 2. Generate unique shortCode
+      let isUnique = false
+      let attempts = 0
+      while (!isUnique && attempts < 10) {
+        shortCode = generateShortCode()
+        const existing = await prisma.shortLink.findUnique({
+          where: { shortCode },
+        })
+        if (!existing) {
+          isUnique = true
+        }
+        attempts++
+      }
+
+      if (!isUnique) {
+        return res.status(500).json({ error: 'Failed to generate a unique short code. Please try again.' })
+      }
     }
 
     // 3. Create

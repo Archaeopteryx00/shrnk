@@ -39,12 +39,12 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section style={{ marginBottom: '8rem' }}>
+      <section>
         <h2 className="landing-section-title">Features built for modern workflows</h2>
         <div className="landing-features">
           <div className="feature-card">
             <div className="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
               </svg>
@@ -55,7 +55,7 @@ const LandingPage = () => {
 
           <div className="feature-card">
             <div className="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
               </svg>
             </div>
@@ -65,7 +65,7 @@ const LandingPage = () => {
 
           <div className="feature-card">
             <div className="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M3 3v18h18"></path>
                 <path d="m19 9-5 5-4-4-3 3"></path>
               </svg>
@@ -76,7 +76,7 @@ const LandingPage = () => {
 
           <div className="feature-card">
             <div className="feature-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
                 <line x1="9" y1="3" x2="9" y2="21"></line>
                 <line x1="9" y1="9" x2="21" y2="9"></line>
@@ -90,7 +90,7 @@ const LandingPage = () => {
 
       {/* How It Works Section */}
       <section className="landing-how">
-        <h2 className="landing-section-title" style={{ marginBottom: '4rem' }}>How it works</h2>
+        <h2 className="landing-section-title">How it works</h2>
         <div className="how-grid">
           <div className="how-step">
             <div className="how-step-num">01</div>
@@ -115,17 +115,21 @@ const LandingPage = () => {
       {/* CTA Section */}
       {!token && (
         <section className="landing-cta-banner">
-          <h2 style={{ fontSize: '1.75rem', fontWeight: 800, letterSpacing: '-0.02em' }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 700, letterSpacing: '-0.02em', margin: 0 }}>
             Ready to shorten your links?
           </h2>
-          <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.95rem' }}>
+          <p style={{ color: 'var(--color-text-secondary)', fontSize: '13px', margin: 0 }}>
             Join Shrnk today and start managing your developer links with real-time statistics.
           </p>
-          <Link to="/register" className="btn btn-primary" style={{ width: 'auto', minWidth: '180px' }}>
+          <Link to="/register" className="btn btn-primary" style={{ width: 'auto', minWidth: '160px', marginTop: '0.25rem' }}>
             Get Started Free
           </Link>
         </section>
       )}
+
+      <footer className="footer">
+        &copy; {new Date().getFullYear()} Shrnk. All rights reserved.
+      </footer>
     </div>
   )
 }

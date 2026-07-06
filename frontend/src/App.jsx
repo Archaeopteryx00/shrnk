@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom'
+import { Routes, Route, Link, NavLink, Navigate, useNavigate } from 'react-router-dom'
 import { useAuth } from './context/AuthContext'
 import ProtectedRoute from './components/ProtectedRoute'
+import ToastContainer from './components/Toast'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Dashboard from './pages/Dashboard'
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <ToastContainer />
       <header className="navbar">
         <div className="nav-left-group">
           <Link to="/" className="logo">
@@ -36,41 +38,33 @@ function App() {
           </Link>
           {token && (
             <nav className="nav-links">
-              <Link to="/dashboard" className="nav-link">
+              <NavLink to="/dashboard" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                 Dashboard
-              </Link>
-              <Link to="/links/new" className="nav-link">
+              </NavLink>
+              <NavLink to="/links/new" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
                 Shorten Link
-              </Link>
+              </NavLink>
             </nav>
           )}
         </div>
 
         <div className="nav-right-group">
           {token ? (
-            <>
-              <button className="nav-icon-btn" title="Notifications">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
-                  <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+            <div className="profile-dropdown-wrapper">
+              <button className="nav-avatar-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
+                <div className="nav-avatar-badge">{getInitials()}</div>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
               </button>
-              <div className="profile-dropdown-wrapper">
-                <button className="nav-avatar-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
-                  <div className="nav-avatar-badge">{getInitials()}</div>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                  </svg>
-                </button>
-                {dropdownOpen && (
-                  <div className="profile-dropdown-menu">
-                    <button onClick={handleLogout} className="profile-dropdown-item">
-                      Log Out
-                    </button>
-                  </div>
-                )}
-              </div>
-            </>
+              {dropdownOpen && (
+                <div className="profile-dropdown-menu">
+                  <button onClick={handleLogout} className="profile-dropdown-item">
+                    Log Out
+                  </button>
+                </div>
+              )}
+            </div>
           ) : (
             <>
               <Link to="/login" className="nav-link">
@@ -84,22 +78,16 @@ function App() {
         </div>
       </header>
 
-      <main className="main-content">
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={!token ? <Login /> : <Navigate to="/dashboard" replace />} />
-          <Route path="/register" element={!token ? <Register /> : <Navigate to="/dashboard" replace />} />
-          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-          <Route path="/links/new" element={<ProtectedRoute><CreateLink /></ProtectedRoute>} />
-          <Route path="/links/:id/edit" element={<ProtectedRoute><EditLink /></ProtectedRoute>} />
-          <Route path="/links/:id" element={<ProtectedRoute><LinkDetail /></ProtectedRoute>} />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </main>
-
-      <footer className="footer">
-        &copy; {new Date().getFullYear()} Shrnk. All rights reserved.
-      </footer>
+      <Routes>
+        <Route path="/" element={<main className="main-content"><LandingPage /></main>} />
+        <Route path="/login" element={!token ? <Login /> : <Navigate to="/dashboard" replace />} />
+        <Route path="/register" element={!token ? <Register /> : <Navigate to="/dashboard" replace />} />
+        <Route path="/dashboard" element={<ProtectedRoute><main className="main-content"><Dashboard /></main></ProtectedRoute>} />
+        <Route path="/links/new" element={<ProtectedRoute><main className="main-content"><CreateLink /></main></ProtectedRoute>} />
+        <Route path="/links/:id/edit" element={<ProtectedRoute><main className="main-content"><EditLink /></main></ProtectedRoute>} />
+        <Route path="/links/:id" element={<ProtectedRoute><main className="main-content"><LinkDetail /></main></ProtectedRoute>} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </div>
   )
 }
