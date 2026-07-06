@@ -25,10 +25,18 @@
             }
         },
         {
-            "source": "/(.*)",
+            "source": "/(assets/.*|.*\\.(?:png|svg|ico|js|css|webp|jpg|jpeg|woff|woff2|ttf))",
             "destination": {
                 "type": "service",
                 "service": "frontend"
+            }
+        },
+        {
+            "source": "/(.*)",
+            "destination": {
+                "type": "service",
+                "service": "frontend",
+                "path": "/index.html"
             }
         }
     ]
